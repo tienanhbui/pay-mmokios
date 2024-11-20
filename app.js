@@ -3,6 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
 
 require('dotenv').config();
 
@@ -16,6 +17,10 @@ mongoose.connect(process.env.MONGO_URI)
 const app = express();
 
 app.use(express.json());
+app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 
 app.use(logger('dev'));
 app.use(express.json());
